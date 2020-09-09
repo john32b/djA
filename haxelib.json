@@ -1,0 +1,10 @@
+{
+	"version": "0.1.0",
+	"releasenote": "",
+	"name": "djA",
+	"description": "Personal Library for Platform Agnostic Tools",
+	"url" : "http://www.github.com",
+	"license": "none",
+	"tags": ["tools"],
+	"contributors": ["JohnDimi"]
+}
