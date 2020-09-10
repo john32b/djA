@@ -4,7 +4,7 @@
  
  - Parser only, you need to load the file yourself
  
- - Check the example file <ConfigFile_Example.ini> at the root of <djA>
+ - Check the example file "docs/ConfigFile_Example.ini"
  
   == Development TODO:
 	- Arrays ?
