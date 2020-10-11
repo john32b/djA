@@ -181,7 +181,10 @@ class ConfigFileA
 
 	}//---------------------------------------------------;
 
-	public function getAsText()
+	/**
+	   Return the current state of the data as a text document (In an Array, line by line)
+	**/
+	public function getDocument():Array<String>
 	{
 		renderedText = [];
 		renderNode(data);

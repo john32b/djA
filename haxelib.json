@@ -2,8 +2,8 @@
 	"version": "0.1.0",
 	"releasenote": "",
 	"name": "djA",
-	"description": "Personal Library for Platform Agnostic Tools",
-	"url" : "http://www.github.com",
+	"description": "Target Agnostic Tools for Haxe",
+	"url" : "https://github.com/johndimi/djA",
 	"license": "none",
 	"tags": ["tools"],
 	"contributors": ["JohnDimi"]
