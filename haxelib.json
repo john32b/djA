@@ -3,8 +3,8 @@
 	"releasenote": "",
 	"name": "djA",
 	"description": "Target Agnostic Tools for Haxe",
-	"url" : "https://github.com/johndimi/djA",
+	"url" : "https://github.com/john32b/djA",
 	"license": "none",
 	"tags": ["tools"],
-	"contributors": ["JohnDimi"]
+	"contributors": ["john32b"]
 }

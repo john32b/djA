@@ -36,7 +36,7 @@ class ConfigFileB
 	static var NO_NEW_LINE = "\\";
 
 	static var reg_section:EReg = ~/^\[([^\]]+)\]/;			// Capture []
-	static var reg_def:EReg = ~/^([^(){}:=]+)[:=](.*)/;		// Capture something=value
+	static var reg_def:EReg = ~/^([^(){}:=]+)[:=](.*)/;		// Capture something=value and something:value
 
 	public var data(default, null):Map<String, Map<String, String>>;	// [section] => { field=value }
 
