@@ -50,7 +50,7 @@
 
  =============================================================== */
 
-package djA.cfg;
+package djA.parser;
 
 import js.html.AbortController;
 import sys.FileStat;

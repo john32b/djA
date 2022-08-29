@@ -28,12 +28,5 @@ class Macros
 	public static macro function isDefined(key : String) : haxe.macro.Expr {
 		return macro $v{haxe.macro.Context.defined(key)};
 	}
-	
-	/** EXPERIMENTAL -- TEST THIS*/
-	macro static function MA(A:Expr, B:Expr)
-	{
-		return macro {
-			 if($A==null) $A=$B;
-		};
-	}//---------------------------------------------------;
+
 }// --

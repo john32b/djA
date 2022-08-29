@@ -23,7 +23,7 @@
 
  =============================================================== */
 
-package djA.cfg;
+package djA.parser;
 
 class ConfigFileB
 {

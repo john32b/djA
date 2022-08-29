@@ -30,7 +30,7 @@
 	
 *******************************************************************/
 
-package djA.cfg;
+package djA.parser;
 
 import Array;
 import String;
