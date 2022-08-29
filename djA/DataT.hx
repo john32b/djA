@@ -21,6 +21,7 @@ class DataT
 	 * @param	into The Target object to copy fields to
 	 * @return	The resulting object
 	 */
+	@:deprecated("Use copyFields")
 	public static function copyFields0(from:Dynamic, into:Dynamic):Dynamic
 	{
 		if (from == null)
@@ -45,10 +46,10 @@ class DataT
 	
 	/**
 	 * - NEW - RECURSIVE - 
-	 * Copy an object's fields into target object. Overwrites the target object's fields. 
-	 * Eorks Recursively for objects inside objects
-	 * Can work with Static Classes as well (as destination)
-	 * NOTE: You need to assign the final object for this to work
+	 * - Copy an object's fields into target object. Overwrites the target object's fields. 
+	 * - Works Recursively for objects inside objects
+	 * - Can work with Static Classes as well (as destination)
+	 * - You need to assign the returned object for this to work
 	 * @param	node The Master object to copy fields from
 	 * @param	into The Target object to copy fields to
 	 * @return	The resulting object
@@ -174,6 +175,15 @@ class DataT
 	}//---------------------------------------------------;
 	
 	
+	// Taken from Franco Ponticelli's THX library:
+	// https://github.com/fponticelli/thx/blob/master/src/Floats.hx#L206
+	public static function roundFloat(number:Float, ?precision=2): Float
+	{
+		number *= Math.pow(10, precision);
+		return Math.round(number) / Math.pow(10, precision);
+	}//---------------------------------------------------;
+	
+	
 	/**
 	 * Get a random element from an array
 	 */
@@ -181,11 +191,39 @@ class DataT
 	{
 		return ar[Std.random(ar.length)];
 	}//---------------------------------------------------;
-	
-	
-	inline public static function lastAr<T>(ar:Array<T>):T 
+
+    /** Get the last element of an array
+     */
+    inline public static function lastAr<T>(ar:Array<T>):T
+    {
+        return ar[ar.length - 1];
+    }//---------------------------------------------------;
+
+	/**
+	 * Pads a string to reach a certain length.
+	 * If string is longer it gets trimmed with a ".." at the end
+	 * If string is shorter it gets padded with $char
+	 * e.g. padTrimString("hello",10,".") == ".....hello"
+	 * @param str String to pad
+	 * @param len New length
+	 * @param char Character to add when trimmind/padding
+	 * @param leftPad If true will trim/pad to the left
+	 */
+	public static function padTrimString(str:String, size:Int, char:String = ".", leftPad:Bool = true):String
 	{
-		return ar[ar.length - 1];
+		if (str.length > size) {
+			// Add a couple of chars in the end to indicate that it was truncated
+			return str.substr(0, size-2) + "..";
+		}
+		else if (str.length < size) {
+			if(leftPad)
+				return StringTools.lpad(str, char, size);
+			else
+				return StringTools.rpad(str, char, size);
+		}else {
+			// no need to change it
+			return str;
+		}
 	}//---------------------------------------------------;
 	
 	
@@ -215,7 +253,9 @@ class DataT
 }// --
 
 
+
 /** Misc ::
+
 
 	isFloat = (NUMBER % 1 != 0);
 
@@ -225,5 +265,6 @@ class DataT
 		number *= Math.pow(10, precision);
 		return Math.round(number) / Math.pow(10, precision);
 	}//---------------------------------------------------;
+
 
 */

@@ -24,8 +24,8 @@
 		%userprofile%\AppData\appfolder\test
 		#this comment line will be ignored
 		001 ; value
-		003 # This is not a comment, a comment should be at the start of a line
-		- NOTE : All lines are AUTO-TRIMMED, left and right,
+		003 # This is not a comment, the comment symbol "#" should be at the start of a line
+		- NOTE : All lines are AUTO-TRIMMED, left and right
 	-----
 	
 *******************************************************************/
@@ -45,7 +45,7 @@ class EntryFileA
 	var pathFile:String;
 	var DB_COMMENTS:Array<String>;	// Holds all the comments that are read
 	
-	public var DB:Array<Array<String>>;	// You an directly write to this, but be careful
+	public var DB:Array<Array<String>>;	// You can directly write to this, but be careful
 	
 	// In case of error, read this
 	public var ERROR:String = "";
@@ -86,7 +86,6 @@ class EntryFileA
 			FC += '\n\n';
 			
 		for (entry in DB) {
-			// Dev I want to limit the times 'D' gets written, for speed
 			var p = "";
 			for (line in entry)	{
 				p += line;
