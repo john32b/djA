@@ -4,9 +4,13 @@
 
 This is a helper library for **HAXE**, it contains some target Agnostic/general purpose tools.
 
+Install:
+`haxelib git djA https://github.com/john32b/djA`
+
 ---
 
-No documentation for this project, as this is a secondary library that other libraries and programs use  
+No documentation for this project, this is a secondary library other libraries and programs use.
+
 **Checkout these:**  
 
 - **djFlixel** (Flixel Helpers and Tools) https://github.com/john32b/djFlixel
