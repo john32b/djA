@@ -34,9 +34,9 @@ package djA.parser;
 
 import Array;
 import String;
-import haxe.io.Path;
 import sys.FileSystem;
 import sys.io.File;
+
 using StringTools;
 
 class EntryFileA 

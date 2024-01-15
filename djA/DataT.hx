@@ -251,20 +251,3 @@ class DataT
 	}//---------------------------------------------------;
 	
 }// --
-
-
-
-/** Misc ::
-
-
-	isFloat = (NUMBER % 1 != 0);
-
-	/// Taken from Franco Ponticelli's THX library:
-	// https://github.com/fponticelli/thx/blob/master/src/Floats.hx#L206
-	function roundFloat(number:Float, precision:Int = 2):Float {
-		number *= Math.pow(10, precision);
-		return Math.round(number) / Math.pow(10, precision);
-	}//---------------------------------------------------;
-
-
-*/
