@@ -28,8 +28,8 @@ package djA.parser;
 class ConfigFileB
 {
 	static inline var OBJEX_NUM_SYMBOL = "#";
-	static inline var STRING_TERMINATOR = "\\e";
-	static inline var FORCE_EMPTYLINES = "\\l";
+	static inline var STRING_TERMINATOR = "\\e";	// Force an a multiline text
+	static inline var FORCE_EMPTYLINES = "\\l";		// Process the initial whitespace after a =
 
 	static var NEWLINES = ["\n", "\r", "r\n"];		// These are for checks only. New newlines are "\n"
 	static var COMMENTS = ["#", ";"];
