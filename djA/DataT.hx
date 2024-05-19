@@ -198,6 +198,7 @@ class DataT
 	@:deprecated("Use one of the StrT.hx functions")
 	public static function padTrimString(str:String, size:Int, char:String = ".", leftPad:Bool = true):String
 	{
+		return "";
 	}//---------------------------------------------------;
 
 }// --
