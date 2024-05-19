@@ -1,65 +1,27 @@
-/**
- * General Purpose Data Helpers
- * = ALL TARGETS 
- *
- */
+ /**
+	General Purpose Data oriented Helpers
+ **/
 
 package djA;
-
 
 @:dce
 class DataT 
 {
-	
+
 	/**
-	 * - Old Way - does not work Recursively, Is here in case anything breaks. 
-	 * - TODO - Make sure copyFields works and delete this one
-	 * Copy an object's fields into target object. Overwrites the target object's fields. 
-	 * Can work with Static Classes as well (as destination)
-	 * NOTE: You need to assign the final object for this to work
-	 * @param	node The Master object to copy fields from
-	 * @param	into The Target object to copy fields to
-	 * @return	The resulting object
-	 */
-	@:deprecated("Use copyFields")
-	public static function copyFields0(from:Dynamic, into:Dynamic):Dynamic
-	{
-		if (from == null)
-		{
-			// trace("Warning: No fields to copy from source, returning destination object");
-			return into;
-		}
-		
-		if (into == null) 
-		{
-			into = Reflect.copy(from);
-		}else
-		{
-			for (f in Reflect.fields(from)) 
-			{
-				Reflect.setField(into, f, Reflect.field(from, f));
-			}
-		}
-		
-		return into;
-	}//---------------------------------------------------;
-	
-	/**
-	 * - NEW - RECURSIVE - 
-	 * - Copy an object's fields into target object. Overwrites the target object's fields. 
-	 * - Works Recursively for objects inside objects
-	 * - Can work with Static Classes as well (as destination)
-	 *   (you need to cast the returned object for this to work)
-	 * @param	node The Master object to copy fields from
-	 * @param	into The Target object to copy fields to
-	 * @return	The resulting object
+		- Copy an object's fields into target object. Overwrites the target object's fields. 
+		- Works Recursively for objects inside objects
+		- Can work with Static Classes as well (as destination)
+			(you need to cast the returned object for this to work)
+		@param	node The Source object to copy fields from
+		@param	into The Target object to copy fields to
+		@return	A new object
 	 */
 	public static function copyFields(from:Dynamic, into:Dynamic):Dynamic
 	{
 		if (from == null)
 		{
-			// trace("Warning: No fields to copy from source, returning destination object");
-			return into;
+			return copyDeep(into);
 		}
 		
 		if (into == null) 
@@ -83,7 +45,8 @@ class DataT
 	
 	
 	/**
-	   Return a deep copy of an anonymous object. Meaning will copy all sub-objects as well
+	   Return a deep copy of an anonymous object. 
+	   *Will copy all sub-objects as well*
 	   @param	o The object to clone
 	   @return A new object
 	**/
@@ -93,6 +56,12 @@ class DataT
 		return copyFields(o,{});
 	}//---------------------------------------------------;
 
+
+	/**
+		Try to Parse a string as Int
+		- Returns Int value
+		- If cannot parse will return `0`
+	**/
 	public static function intOrZeroFromStr(str:String):Int
 	{
 		if (str == null) return 0;
@@ -101,7 +70,12 @@ class DataT
 		return RES;
 	}//---------------------------------------------------;
 	
-	
+
+	/**
+		Try to Parse a string as Float
+		- Returns Float value
+		- If cannot parse will return `0.0`
+	**/
 	public static function floatOrZeroFromStr(str:String):Float
 	{
 		if (str == null) return 0.0;
@@ -109,9 +83,10 @@ class DataT
 		if (Math.isNaN(RES)) return 0.0;
 		return RES;
 	}//---------------------------------------------------;
-	
+
+
 	/**
-	   Useful to get default values from object fields.
+	   Useful to get default values from object fields
 	   @param	a Object Fields
 	   @param	v Default Value
 	   @return
@@ -120,16 +95,16 @@ class DataT
 	{
 		if (a == null) return v; return a;
 	}//---------------------------------------------------;
-	
-	
+
+
 	/**
 	   Convert a CSV string to HashTable. 
-	   - NEW: Support for flags,  {type:10,glowing}. Check with .exists()
-	   -      Support for whitespace, { type  : 20,  lives   : 40}  
-	   Values as strings
-	   e.g. "getCSVTable("lives:10,speed:30") ==> [ 'lives'=>'10', 'speed'=>'30' ]
-	   @param	csv Format "id:value,id2:value..."
-	   @return 
+	   - Supports flags,  `{type:10, flag01}`, then check with `.exists(...)`
+	   - Supports whitespace between identifiers, e.g. `{  type  : 20,  lives   : 40    }` is valid
+	   - *Note* Numeric values are parsed as strings!
+	   e.g. `getCSVTable("lives:10,speed:30,flag01") ==> [ 'lives'=>'10', 'speed'=>'30', 'flag01'=>'' ]`
+	   @param	csv Format `id:value,id2:value...`
+	   @return	Map object
 	**/
 	public static function getCSVTable(csv:String):Map<String,String>
 	{
@@ -148,6 +123,7 @@ class DataT
 		return M;
 	}//---------------------------------------------------;
 	
+
 	/**
 	   Convert a CSV string to an Dynamic Object
 	   Values as strings
@@ -161,15 +137,18 @@ class DataT
 		var O:Dynamic = {};
 		var pairs = csv.split(',');
 		for (p in pairs) {
-			var d = p.split(':');
+			var d = StringTools.trim(p).split(':');
 			Reflect.setField(O, d[0], d[1]);
 		}
 		return O;
 	}//---------------------------------------------------;
 	
 	
-	// Taken from Franco Ponticelli's THX library:
-	// https://github.com/fponticelli/thx/blob/master/src/Floats.hx#L206
+	/**
+		Rounds a float with target precision
+		Taken from Franco Ponticelli's THX library:
+		https://github.com/fponticelli/thx/blob/master/src/Floats.hx#L206
+	**/
 	public static function roundFloat(number:Float, ?precision=2): Float
 	{
 		number *= Math.pow(10, precision);
@@ -178,51 +157,25 @@ class DataT
 	
 	
 	/**
-	 * Get a random element from an array
+		Get a random element from an array
 	 */
 	inline public static function randAr<T>(ar:Array<T>):T 
 	{
 		return ar[Std.random(ar.length)];
 	}//---------------------------------------------------;
 
-    /** Get the last element of an array
+    /** 
+		Get the last element of an array
      */
     inline public static function lastAr<T>(ar:Array<T>):T
     {
         return ar[ar.length - 1];
     }//---------------------------------------------------;
 
-	/**
-	 * Pads a string to reach a certain length.
-	 * If string is longer it gets trimmed with a ".." at the end
-	 * If string is shorter it gets padded with $char
-	 * e.g. padTrimString("hello",10,".") == ".....hello"
-	 * @param str String to pad
-	 * @param len New length
-	 * @param char Character to add when trimmind/padding
-	 * @param leftPad If true will trim/pad to the left
-	 */
-	public static function padTrimString(str:String, size:Int, char:String = ".", leftPad:Bool = true):String
-	{
-		if (str.length > size) {
-			// Add a couple of chars in the end to indicate that it was truncated
-			return str.substr(0, size-2) + "..";
-		}
-		else if (str.length < size) {
-			if(leftPad)
-				return StringTools.lpad(str, char, size);
-			else
-				return StringTools.rpad(str, char, size);
-		}else {
-			// no need to change it
-			return str;
-		}
-	}//---------------------------------------------------;
-	
 	
 	/**
-	   https://github.com/jdegoes/stax/blob/master/src/main/haxe/haxe/util/Guid.hx
-	   @return
+		Generate a GUID string
+		https://github.com/jdegoes/stax/blob/master/src/main/haxe/haxe/util/Guid.hx
 	**/
 	 public static function getGUID(): String 
 	 {
@@ -234,13 +187,17 @@ class DataT
 	}//---------------------------------------------------;
 	
 	/**
-	 * Converts bytes to megabytes. Useful for creating readable filesizes.
-	 * 
-	 * @param	bytes Number of bytes to convert
-	 * @return  The converted bytes to string format.
+		Converts bytes to megabytes. Useful for creating human readable filesizes.
+		@param	bytes Number of bytes to convert
 	 */
 	public static function bytesToMBStr(bytes:Int):String {
 		return Std.string( Math.ceil( bytes / (1024 * 1024)));
 	}//---------------------------------------------------;
 	
+
+	@:deprecated("Use one of the StrT.hx functions")
+	public static function padTrimString(str:String, size:Int, char:String = ".", leftPad:Bool = true):String
+	{
+	}//---------------------------------------------------;
+
 }// --

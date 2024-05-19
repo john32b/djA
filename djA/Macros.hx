@@ -29,4 +29,18 @@ class Macros
 		return macro $v{haxe.macro.Context.defined(key)};
 	}
 
+	/**
+	   Adds a null check to a function call
+	   SafeCall (shortened)
+	**/
+	macro public static function sCall(cb:haxe.macro.Expr, ar:Array<haxe.macro.Expr>)
+	{
+		var e:haxe.macro.Expr = {
+			expr:ECall(cb, ar),
+			pos:haxe.macro.Context.currentPos()
+		};
+		
+		return macro { if ($cb != null) $e; };
+	}//---------------------------------------------------;
+
 }// --

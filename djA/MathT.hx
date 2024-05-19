@@ -51,6 +51,15 @@ class MathT
 		return n;
 	}//---------------------------------------------------;
 
+
+	/**
+		Get fraction digits len of a number
+	**/
+	public static function fractionLen(num:Float):Int
+	{
+		var s = '$num'.split('.');
+		return (s[1]==null)?0:s[1].length;
+	}// -------------------------;
 	
 	/**
 	   Clamp INT to be inside Array Length
